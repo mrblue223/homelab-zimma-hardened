@@ -74,6 +74,13 @@ Launch the library and Twingate connector:
 cd ../services
 docker-compose up -d
 ```
+## 🛡 Hardening Checklist
+- [x] **Zero-Trust Network:** Twingate Connector handles all external routing.
+- [x] **No-Password SSH:** Ed25519 Keys required; password auth disabled.
+- [x] **Filesystem Integrity:** Daily ClamAV scans with automated quarantine.
+- [x] **Network Lockdown:** UFW default-deny policy with logging enabled.
+- [x] **Log Rotation:** System logs are rotated to prevent disk exhaustion on the ZimmaBlade.
+
 ## 🛡 Backup & Maintenance
 
 The scripts/backup_manager.sh script performs a differential sync to a secondary mount point.
