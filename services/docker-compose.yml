@@ -1,0 +1,19 @@
+# fictional - Twingate is the "invisible" layer here. You’ll deploy the Twingate Connector as a Docker container or systemd service. This ensures your ethical hacking library isn't exposed to the public internet.
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    ports:
+      - 1337:80
+    volumes:
+      - /mnt/data/audiobooks:/audiobooks
+      - /mnt/data/config:/config
+    restart: unless-stopped
+
+  twingate-connector:
+    image: twingate/connector:latest
+    restart: always
+    environment:
+      - TWINGATE_NETWORK=${TWINGATE_NETWORK}
+      - TWINGATE_ACCESS_TOKEN=${TWINGATE_TOKEN}
+      - TWINGATE_REFRESH_TOKEN=${TWINGATE_REFRESH_TOKEN}
